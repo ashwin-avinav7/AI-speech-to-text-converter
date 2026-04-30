@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Voice Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="container glass-panel">
+        <header>
+            <h1 class="gradient-text">AI Speech-to-Text Generator</h1>
+            <p class="subtitle">Transform spoken audio into text using advanced AI algorithms.</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('live-tab', event)">Live Dictation</button>
+            <button class="tab-btn" onclick="showTab('batch-tab', event)">Audio Upload</button>
+        </div>
+
+        <div id="live-tab" class="tab-content active">
+            <div class="mic-wrapper">
+                <p class="instruction">Click the microphone to start recording...</p>
+                
+                <button id="start_button" class="mic-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+                <p id="mic_status" class="status-text">System Ready</p>
+            </div>
+            
+            <div class="results-container">
+                <div id="results">
+                    <span id="final_span" class="final"></span>
+                    <span id="interim_span" class="interim"></span>
+                </div>
+                <div class="metrics">
+                    <span id="live_word_count" class="metric-badge">Words: 0</span>
+                    <button id="download_live" class="secondary-btn" style="display: none;">Download .txt</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="batch-tab" class="tab-content" style="display: none;">
+            <div class="upload-wrapper">
+                <div class="file-drop-area">
+                    <input type="file" id="audio_file" accept=".wav" class="file-input">
+                    <p class="file-msg">Drag & Drop or Click to Select .WAV File</p>
+                </div>
+                <button id="upload_button" class="primary-btn pulse-hover">Transcribe Audio</button>
+            </div>
+            
+            <div class="results-container">
+                <div id="batch_results" class="results-box" style="display: none;"></div>
+                <div class="metrics">
+                    <span id="batch_word_count" class="metric-badge" style="display: none;">Words: 0</span>
+                    <button id="download_batch" class="secondary-btn" style="display: none;">Download .txt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
